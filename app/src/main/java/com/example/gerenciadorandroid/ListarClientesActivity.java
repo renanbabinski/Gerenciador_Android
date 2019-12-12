@@ -37,7 +37,8 @@ public class ListarClientesActivity extends AppCompatActivity {
         dao = new ClienteDAO(this);
         clientes = dao.obterTodos();
         clientesFiltrados.addAll(clientes);
-        ArrayAdapter<Cliente> adaptador = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, clientesFiltrados);
+        //ArrayAdapter<Cliente> adaptador = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, clientesFiltrados);
+        ClienteAdapter adaptador = new ClienteAdapter(this, clientesFiltrados);
         listView.setAdapter(adaptador);
         registerForContextMenu(listView);
     }
