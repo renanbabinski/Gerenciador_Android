@@ -105,6 +105,15 @@ public class ListarClientesActivity extends AppCompatActivity {
         startActivity(it);
     }
 
+    public void atualizar(MenuItem item){
+        AdapterView.AdapterContextMenuInfo menuInfo =
+                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final Cliente clienteAtualizar = clientesFiltrados.get(menuInfo.position);
+        Intent it = new Intent(this, CadastroClienteActivity.class);
+        it.putExtra("cliente", clienteAtualizar);
+        startActivity(it);
+    }
+
     @Override
     public void onResume(){
         super.onResume();
