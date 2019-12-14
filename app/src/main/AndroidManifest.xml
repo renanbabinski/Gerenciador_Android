@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/icone_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CadastroClienteActivity"></activity>
+        <activity android:name=".CadastroServicoActivity"></activity>
+        <activity android:name=".ListarClientesActivity" />
+        <activity android:name=".CadastroClienteActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ListarClientesActivity">
+        <activity android:name=".Tela_principal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
