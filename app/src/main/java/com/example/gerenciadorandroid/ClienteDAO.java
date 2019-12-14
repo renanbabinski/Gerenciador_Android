@@ -50,6 +50,16 @@ public class ClienteDAO {
         banco.delete("cliente", "id = ?", new String[]{c.getId().toString()});
     }
 
+    public void atualizar(Cliente cliente){
+        ContentValues values = new ContentValues();
+        values.put("nome", cliente.getNome());
+        values.put("endereco", cliente.getEndereco());
+        values.put("telefone", cliente.getTelefone());
+        values.put("cpf", cliente.getCpf());
+        values.put("data", cliente.getData());
+        banco.update("cliente", values, "id = ?", new String[]{cliente.getId().toString()});
+    }
+
 
 
 

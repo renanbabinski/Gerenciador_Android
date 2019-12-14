@@ -3,6 +3,7 @@ package com.example.gerenciadorandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.SpannableStringBuilder;
@@ -24,6 +25,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
     private EditText cpf;
     private EditText data;
     private ClienteDAO dao;
+    private Cliente cliente = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,16 @@ public class CadastroClienteActivity extends AppCompatActivity {
         data = findViewById(R.id.editDate);
         data.setInputType(InputType.TYPE_NULL);
         dao = new ClienteDAO(this);
+
+        Intent it = getIntent();
+        if(it.hasExtra("cliente")){
+            cliente = (Cliente) it.getSerializableExtra("cliente");
+            nome.setText(cliente.getNome());
+            endereco.setText(cliente.getEndereco());
+            telefone.setText(cliente.getTelefone());
+            cpf.setText(cliente.getCpf());
+            data.setText(cliente.getData());
+        }
 
         data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,14 +74,24 @@ public class CadastroClienteActivity extends AppCompatActivity {
     }
 
     public void salvar(View view){
-        Cliente c = new Cliente();
-        c.setNome(nome.getText().toString());
-        c.setEndereco(endereco.getText().toString());
-        c.setTelefone(telefone.getText().toString());
-        c.setCpf(cpf.getText().toString());
-        c.setData(data.getText().toString());
-        long id = dao.inserir(c);
-        Toast.makeText(this, "Cliente inserido com id: " + id, Toast.LENGTH_SHORT).show();
+        if(cliente == null) {
+            cliente = new Cliente();
+            cliente.setNome(nome.getText().toString());
+            cliente.setEndereco(endereco.getText().toString());
+            cliente.setTelefone(telefone.getText().toString());
+            cliente.setCpf(cpf.getText().toString());
+            cliente.setData(data.getText().toString());
+            long id = dao.inserir(cliente);
+            Toast.makeText(this, "Cliente inserido com id: " + id, Toast.LENGTH_SHORT).show();
+        }else{
+            cliente.setNome(nome.getText().toString());
+            cliente.setEndereco(endereco.getText().toString());
+            cliente.setTelefone(telefone.getText().toString());
+            cliente.setCpf(cpf.getText().toString());
+            cliente.setData(data.getText().toString());
+            dao.atualizar(cliente);
+            Toast.makeText(this, "O cliente foi Atualizado", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

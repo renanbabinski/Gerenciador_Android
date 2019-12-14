@@ -37,7 +37,8 @@ public class ListarClientesActivity extends AppCompatActivity {
         dao = new ClienteDAO(this);
         clientes = dao.obterTodos();
         clientesFiltrados.addAll(clientes);
-        ArrayAdapter<Cliente> adaptador = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, clientesFiltrados);
+        //ArrayAdapter<Cliente> adaptador = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, clientesFiltrados);
+        ClienteAdapter adaptador = new ClienteAdapter(this, clientesFiltrados);
         listView.setAdapter(adaptador);
         registerForContextMenu(listView);
     }
@@ -102,6 +103,15 @@ public class ListarClientesActivity extends AppCompatActivity {
 
     public void cadastrar(MenuItem item){
         Intent it = new Intent(this, CadastroClienteActivity.class);
+        startActivity(it);
+    }
+
+    public void atualizar(MenuItem item){
+        AdapterView.AdapterContextMenuInfo menuInfo =
+                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final Cliente clienteAtualizar = clientesFiltrados.get(menuInfo.position);
+        Intent it = new Intent(this, CadastroClienteActivity.class);
+        it.putExtra("cliente", clienteAtualizar);
         startActivity(it);
     }
 
