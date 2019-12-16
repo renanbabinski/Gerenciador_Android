@@ -6,7 +6,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class CadastroClienteActivity extends AppCompatActivity {
@@ -36,7 +34,7 @@ public class CadastroClienteActivity extends AppCompatActivity {
         endereco = findViewById(R.id.editEndereco);
         telefone = findViewById(R.id.editTelefone);
         cpf = findViewById(R.id.editCPF);
-        data = findViewById(R.id.editDate);
+        data = findViewById(R.id.editDateCliente);
         data.setInputType(InputType.TYPE_NULL);
         dao = new ClienteDAO(this);
 
