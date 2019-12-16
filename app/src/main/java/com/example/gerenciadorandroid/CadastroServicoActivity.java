@@ -20,6 +20,7 @@ public class CadastroServicoActivity extends AppCompatActivity {
     private List<Cliente> clientes;
     private ClienteDAO dao;
     private EditText dataEntrada;
+    private EditText dataSaida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,10 @@ public class CadastroServicoActivity extends AppCompatActivity {
         clientes = dao.obterTodos();
         dataEntrada = findViewById(R.id.editDateEntrada);
         dataEntrada.setInputType(InputType.TYPE_NULL);
+        dataSaida = findViewById(R.id.edit_DateSaida);
+        dataSaida.setInputType(InputType.TYPE_NULL);
 
-        Spinner spinner = findViewById(R.id.spinner_cliente);
+        Spinner spinner = findViewById(R.id.spin_cliente);
 
         ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>(CadastroServicoActivity.this,
                 android.R.layout.simple_list_item_1, clientes);
@@ -42,6 +45,12 @@ public class CadastroServicoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDateDialog(dataEntrada);
+            }
+        });
+        dataSaida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog(dataSaida);
             }
         });
     }
